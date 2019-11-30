@@ -27,7 +27,7 @@ class ViewController2: UIViewController {
         // Do any additional setup after loading the view.
     }
     func getData()->[String]{
-        return ["¥25.91","京东超市 超市尖货轮番抢购","良品铺子 即食鱿鱼丝 麻辣海鲜熟食鱿鱼仔鱿鱼丝干 网红香辣小吃手撕肉干肉铺类休闲零食66g烧烤味","P0"];
+        return ["¥25.91","京东超市 超市尖货轮番抢购","良品铺子 即食鱿鱼丝 麻辣海鲜熟食鱿鱼仔鱿鱼丝干 网红香辣小吃手撕肉干肉铺类休闲零食66g烧烤味","P10"];
         
     }
 

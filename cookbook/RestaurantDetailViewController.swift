@@ -13,9 +13,15 @@ class RestaurantDetailViewController: UIViewController, UITableViewDelegate,UITa
     @IBOutlet weak var leftTableView: UITableView!
     @IBOutlet weak var rightTableView: UITableView!
     
+    @IBOutlet weak var restImg: UIImageView!
+    @IBOutlet weak var restNameLabel: UILabel!
+    @IBOutlet weak var restScore: UILabel!
+    
     var mealList: [(String, [Meal])]?
     var selectIndex = 0
     var alreadyLoad = false
+    
+    var restaurantDetail: restaurant?
 
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -122,6 +128,10 @@ class RestaurantDetailViewController: UIViewController, UITableViewDelegate,UITa
         
         leftTableView.rowHeight = 50
         rightTableView.rowHeight = 90
+        
+        restNameLabel.text = restaurantDetail?.name
+        restImg.image = restaurantDetail?.pic
+        restScore.text = "评分 \(restaurantDetail!.grade!)"
         
         mealList = getData()
     }
