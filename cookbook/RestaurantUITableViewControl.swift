@@ -17,7 +17,7 @@ class RestaurantUITableViewControl: UITableViewController,UISearchBarDelegate {
     var gradeList:[Float] = [4.5,4.6,4.8,4.7,4.9,4.5,4.6]
     var salesVolumeList:[Int] = [4598,3591,2141,3654,5126,2201,1257,3354]
     var picList:[UIImage?] = [UIImage]()
-    func addRestuarant(name: String?,desc: String?,grade: Float?,pic: UIImage?,salesVolume: Int?){
+    func addRestuarant(name: String,desc: String?,grade: Float?,pic: UIImage?,salesVolume: Int?){
         restaurantList.append(restaurant(name:name,desc:desc,grade: grade,pic: pic,salesVolume: salesVolume))
         
     }
@@ -28,16 +28,16 @@ class RestaurantUITableViewControl: UITableViewController,UISearchBarDelegate {
     }
     else{
         self.result=[]
-        var c:Int = 0
-        for arr in self.nameList{
-            
-            if arr.hasPrefix(searchText){
-                self.result.append(restaurantList[c])
+       // var c:Int = 0
+        for arr in self.restaurantList{
+            let Na = arr.name
+            if Na.hasPrefix(searchText){
+                self.result.append(arr)
                 
                 print(arr)
                 
             }
-            c=c+1
+            
         }
     }
     self.tableView.reloadData()
@@ -53,6 +53,12 @@ class RestaurantUITableViewControl: UITableViewController,UISearchBarDelegate {
         self.tableView.reloadData()
     }
     
+    @IBAction func chushihua() {
+       initrlist()
+        self.result=self.restaurantList
+        tableView.reloadData()
+    }
+    
     
     
     func loadpic(count: Int){
@@ -64,15 +70,52 @@ class RestaurantUITableViewControl: UITableViewController,UISearchBarDelegate {
         
     }
     
+    func saverestaurantFile(){
+        
+        
+        let success = NSKeyedArchiver.archiveRootObject(restaurantList, toFile:  restaurant.ArchiveURL.path)
+       
+       
+        if !success{
+            print("Failed...")
+        }
+    }
     
-    func initrestaurantList(){
-        //UIImage aimage = [UIImage imageNamed:@"Image"];
-        
-        
+    func loadrestaurantFile() -> [restaurant]? {
+        print("1122222")
+        return (NSKeyedUnarchiver.unarchiveObject(withFile: restaurant.ArchiveURL.path) as? [restaurant])
+    }
+    
+    
+    
+  
+    
+    
+    func initrlist()  {
+        self.restaurantList=[]
         let count = nameList.count-1
         loadpic(count: count)
         for i in 0...count{
             addRestuarant(name: nameList[i], desc: descList[i], grade: gradeList[i], pic: picList[i], salesVolume: salesVolumeList[i])
+        }
+        
+    }
+    
+    func initrestaurantList(){
+        //UIImage aimage = [UIImage imageNamed:@"Image"];
+       
+        if let localrestaurantList = loadrestaurantFile(){
+           
+            if localrestaurantList.count != 0{
+                self.restaurantList=localrestaurantList
+                
+            }
+            else{
+               initrlist()
+            }
+        }
+        else{
+            initrlist()
         }
       }
  
@@ -134,17 +177,20 @@ class RestaurantUITableViewControl: UITableViewController,UISearchBarDelegate {
     }
     */
 
-    /*
-    // Override to support editing the table view.
+
+     //Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            restaurantList.remove(at: indexPath.row)
+            self.result=self.restaurantList
+            saverestaurantFile()
+            //tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+ 
 
     /*
     // Override to support rearranging the table view.

@@ -94,7 +94,20 @@
                             <outlet property="delegate" destination="MjB-6z-Yvc" id="10D-hX-97u"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="餐馆列表" id="32l-7T-Bzi"/>
+                    <navigationItem key="navigationItem" title="餐馆列表" id="32l-7T-Bzi">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="iYm-Eq-UN0">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KxF-MC-2dn">
+                                <rect key="frame" x="16" y="6" width="83" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="初始化"/>
+                                <connections>
+                                    <action selector="chushihua" destination="MjB-6z-Yvc" eventType="touchDown" id="6Cg-Op-Ebd"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="PX0-pM-F70"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="Hw6-Ng-uaQ" id="pAI-f0-hVe"/>
                     </connections>
