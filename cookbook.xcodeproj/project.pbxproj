@@ -23,6 +23,7 @@
 		1894DD582383CD270005FAF6 /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894DD572383CD270005FAF6 /* ViewController2.swift */; };
 		18B59861237A86A600095DAB /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B59860237A86A600095DAB /* Meal.swift */; };
 		18B59863237AAA6200095DAB /* MealTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B59862237AAA6200095DAB /* MealTableViewCell.swift */; };
+		18B61BCA23964116001C0367 /* FoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B61BC923964116001C0367 /* FoodTableViewCell.swift */; };
 		18E64C8B23716713005468ED /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E64C8A23716713005468ED /* RestaurantDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		1894DD572383CD270005FAF6 /* ViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 		18B59860237A86A600095DAB /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		18B59862237AAA6200095DAB /* MealTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTableViewCell.swift; sourceTree = "<group>"; };
+		18B61BC923964116001C0367 /* FoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTableViewCell.swift; sourceTree = "<group>"; };
 		18E64C8A23716713005468ED /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +83,7 @@
 				182B5C0C235ED8820093B68D /* AppDelegate.swift */,
 				182B5C0E235ED8820093B68D /* ViewController.swift */,
 				182B5C10235ED8820093B68D /* Main.storyboard */,
+				18B61BC923964116001C0367 /* FoodTableViewCell.swift */,
 				18792E54239274A4005678D1 /* NumberViewController.swift */,
 				18792E56239274B5005678D1 /* TimeViewController.swift */,
 				18792E58239274C4005678D1 /* RemarkViewController.swift */,
@@ -176,6 +179,7 @@
 			files = (
 				18792E59239274C4005678D1 /* RemarkViewController.swift in Sources */,
 				1825D3912392603E001A7F78 /* RestaurantViewCell.swift in Sources */,
+				18B61BCA23964116001C0367 /* FoodTableViewCell.swift in Sources */,
 				1825D38F23925FA4001A7F78 /* RestaurantUITableViewControl.swift in Sources */,
 				1825D38D23925F42001A7F78 /* restaurant.swift in Sources */,
 				18792E5123927148005678D1 /* AddressViewController.swift in Sources */,

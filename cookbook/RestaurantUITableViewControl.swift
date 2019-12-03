@@ -18,7 +18,7 @@ class RestaurantUITableViewControl: UITableViewController,UISearchBarDelegate {
     var gradeList:[Float] = [4.5,4.6,4.8,4.7,4.9,4.5,4.6]
     var salesVolumeList:[Int] = [4598,3591,2141,3654,5126,2201,1257,3354]
     var picList:[UIImage?] = [UIImage]()
-    func addRestuarant(name: String?,desc: String?,grade: Float?,pic: UIImage?,salesVolume: Int?){
+    func addRestuarant(name: String!,desc: String?,grade: Float?,pic: UIImage?,salesVolume: Int?){
         restaurantList.append(restaurant(name:name,desc:desc,grade: grade,pic: pic,salesVolume: salesVolume))
         
     }
@@ -29,16 +29,16 @@ class RestaurantUITableViewControl: UITableViewController,UISearchBarDelegate {
         }
         else{
             self.result=[]
-            var c:Int = 0
-            for arr in self.nameList{
+           // var c:Int = 0
+            for arr in restaurantList{
                 
-                if arr.hasPrefix(searchText){
-                    self.result.append(restaurantList[c])
+                if arr.name.hasPrefix(searchText){
+                    self.result.append(arr)
                     
                     print(arr)
                     
                 }
-                c=c+1
+              
             }
         }
         self.tableView.reloadData()

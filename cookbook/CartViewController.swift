@@ -23,6 +23,10 @@ class CartViewController: UIViewController {
     
     @IBOutlet weak var NumberLable: UILabel!
     
+    @IBOutlet weak var FoodTableView: UITableView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -11,7 +11,7 @@ import UIKit
 
 class restaurant{
     
-    var name: String?
+    var name: String!
     var desc: String?
     var pic: UIImage?
     var grade: Float?
@@ -23,7 +23,7 @@ class restaurant{
         self.pic = pic
         self.salesVolume = salesVolume
     }
-    func changeName(name: String?){
+    func changeName(name: String!){
         self.name=name
     }
     func changeDesc(desc: String?){

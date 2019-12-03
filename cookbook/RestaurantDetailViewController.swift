@@ -48,7 +48,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDelegate,UITa
         }
     }
     
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1.0)
@@ -178,5 +178,8 @@ class RestaurantDetailViewController: UIViewController, UITableViewDelegate,UITa
         
     }
     
+    @IBAction func exitToBack(segue:UIStoryboardSegue){
+        dismiss(animated: false, completion: nil)
+    }
 
 }
