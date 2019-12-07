@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController2: UIViewController {
+    var message:[String]=["¥25.91","爆炒鱿鱼","主要原料：胡萝卜，玉米，牛肉···"]
+    var img:UIImage=UIImage.init(named: "P10")!
 
     @IBOutlet weak var count: UILabel!
     @IBOutlet weak var counter: UIStepper!
@@ -19,27 +21,25 @@ class ViewController2: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         price.text=self.getData()[0];
-        middleLab.text=self.getData()[1];
+        middleLab.text="餐馆佳肴："+self.getData()[1];
         bottomLab.text=self.getData()[2];
-        bigImage.image = UIImage.init(named: self.getData()[3]);
-        counter.value=1;
+        bigImage.image = self.img;
+        
 
         // Do any additional setup after loading the view.
     }
     func getData()->[String]{
-        return ["¥25.91","京东超市 超市尖货轮番抢购","良品铺子 即食鱿鱼丝 麻辣海鲜熟食鱿鱼仔鱿鱼丝干 网红香辣小吃手撕肉干肉铺类休闲零食66g烧烤味","P10"];
+        return self.message;
         
     }
 
     @IBAction func seeShoppingCard(_ sender: Any) {
     }
     @IBAction func addToShoppingCard(_ sender: Any) {
-        counter.value=1;
-        count.text="\(Int(counter.value))";
+       
         
     }
     @IBAction func valueChange(_ sender: Any) {
-        count.text="\(Int(counter.value))";
         
     }    /*
      

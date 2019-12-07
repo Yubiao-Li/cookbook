@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CartViewController: UIViewController {
+class CartViewController: UIViewController,UITableViewDelegate,UITableViewDataSource{
 
     var remark:String?
     var address:String?
@@ -25,13 +25,38 @@ class CartViewController: UIViewController {
     
     @IBOutlet weak var FoodTableView: UITableView!
     
+    var mealList: [Meal]?
+    var selectIndex = 0
+    var alreadyLoad = false
     
+    var restaurantDetail: restaurant?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        FoodTableView.delegate = self
+        FoodTableView.dataSource = self
+        
+        FoodTableView.rowHeight = 90
+        
     }
+    
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return mealList!.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "foodCell", for: indexPath) as! FoodTableViewCell
+        cell.FoodName.text="\(mealList![indexPath.row].name!)"
+        cell.FoodUIImage.image = mealList![indexPath.row].img
+        let prize = String(format: "%.1f", mealList![indexPath.row].price! * Float(mealList![indexPath.row].count!))
+        cell.prize.text="¥\(prize)"
+        cell.number.text = "数量：\(mealList![indexPath.row].count!)"
+        return cell
+
+    }
+  
 
     @IBAction func exitToHere(segue:UIStoryboardSegue){
         dismiss(animated: false, completion: nil)
@@ -72,7 +97,16 @@ class CartViewController: UIViewController {
         print(remark)
         RemarkLable?.text = remarkVC?.remark
         RemarkLable?.isHidden = false
-    }    /*
+    }
+    
+
+        
+    }    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -82,4 +116,4 @@ class CartViewController: UIViewController {
     }
     */
 
-}
+

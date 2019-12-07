@@ -55,6 +55,12 @@ class RestaurantUITableViewControl: UITableViewController,UISearchBarDelegate {
     }
     
     
+    @IBAction func chushihua() {
+        initrlist()
+        self.result = self.restaurantList
+        saverestaurantFile()
+        self.tableView.reloadData()
+    }
     
     func loadpic(count: Int){
         for i in 0...count{
@@ -65,17 +71,53 @@ class RestaurantUITableViewControl: UITableViewController,UISearchBarDelegate {
         
     }
     
+    func saverestaurantFile(){
+        let success = NSKeyedArchiver.archiveRootObject(restaurantList, toFile:  restaurant.ArchiveURL.path)
+        if !success{
+            print("Failed...")
+        }
+    }
     
-    func initrestaurantList(){
-        //UIImage aimage = [UIImage imageNamed:@"Image"];
-        
-        
+    func loadrestaurantFile() -> [restaurant]? {
+        return (NSKeyedUnarchiver.unarchiveObject(withFile: restaurant.ArchiveURL.path) as? [restaurant])
+    }
+    
+    func initrlist()  {
+        self.restaurantList=[]
         let count = nameList.count-1
         loadpic(count: count)
         for i in 0...count{
             addRestuarant(name: nameList[i], desc: descList[i], grade: gradeList[i], pic: picList[i], salesVolume: salesVolumeList[i])
         }
+        
     }
+    func initrestaurantList(){
+        //UIImage aimage = [UIImage imageNamed:@"Image"];
+        if let localrestaurantList = loadrestaurantFile(){
+            
+            if localrestaurantList.count != 0{
+                self.restaurantList=localrestaurantList
+                
+            }
+            else{
+                initrlist()
+            }
+        }
+        else{
+            initrlist()
+        }
+    }
+    
+    @IBAction func saveRestaurant(segue:UIStoryboardSegue){
+        dismiss(animated: false, completion: nil)
+        
+    }
+    
+    @IBAction func cancelrestaurant(segue:UIStoryboardSegue){
+        dismiss(animated: false, completion: nil)
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,7 +162,6 @@ class RestaurantUITableViewControl: UITableViewController,UISearchBarDelegate {
         // Configure the cell...
         cell.salesVolumes?.text = "月售:\(result[indexPath.row].salesVolume!)"
         
-        print(result.count)
         return cell
     }
     
@@ -133,17 +174,20 @@ class RestaurantUITableViewControl: UITableViewController,UISearchBarDelegate {
      }
      */
     
-    /*
+    
      // Override to support editing the table view.
      override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
      if editingStyle == .delete {
+        restaurantList.remove(at: indexPath.row)
+        self.result=self.restaurantList
+        saverestaurantFile()
      // Delete the row from the data source
      tableView.deleteRows(at: [indexPath], with: .fade)
      } else if editingStyle == .insert {
      // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
      }
      }
-     */
+    
     
     /*
      // Override to support rearranging the table view.
@@ -163,13 +207,16 @@ class RestaurantUITableViewControl: UITableViewController,UISearchBarDelegate {
      // MARK: - Navigation
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let VC1 = segue.destination
+
         let VC1 = segue.destination as! RestaurantDetailViewController
         if let selectCell = sender as? RestaurantViewCell{
             let index = tableView.indexPath(for: selectCell)
             VC1.restaurantDetail = result[(index as! NSIndexPath).row]
-            
-        }
-     }
+            }
+        
+        
+    }
  
     
 }

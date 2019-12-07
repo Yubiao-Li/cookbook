@@ -92,20 +92,20 @@ class RestaurantDetailViewController: UIViewController, UITableViewDelegate,UITa
         
         if (tableView.isEqual(leftTableView)){
 
-            let cell = tableView.dequeueReusableCell(withIdentifier: "typeCell", for: indexPath)
-            cell.textLabel?.text="\(mealList![indexPath.row].0)"
+            let cell = tableView.dequeueReusableCell(withIdentifier: "typeCell")
+            cell?.textLabel?.text="\(mealList![indexPath.row].0)"
             
-            cell.selectedBackgroundView = UIView()
-            cell.selectedBackgroundView?.backgroundColor =
+            cell!.selectedBackgroundView = UIView()
+            cell!.selectedBackgroundView?.backgroundColor =
                 UIColor(red: 135/255, green: 191/255, blue: 49/255, alpha: 0)
 
 //            if indexPath.row == selectIndex {
 //                cell.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
 //            }
             
-            return cell
+            return cell!
         }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "mealCell", for: indexPath) as! MealTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "mealCell") as! MealTableViewCell
             cell.title?.text="\(mealList![indexPath.section].1[indexPath.row].name!)"
             cell.subTitle?.text="\(mealList![indexPath.section].1[indexPath.row].desc!)"
             cell.mealImg?.image = UIImage.init(named: "meal")
@@ -137,21 +137,23 @@ class RestaurantDetailViewController: UIViewController, UITableViewDelegate,UITa
     }
     
     func getData()->[(String, [Meal])]{
+        let mealImage2 = UIImage.init(named: "meal")
+        
         return [
-                ("热销", [Meal(name: "黑椒牛柳", desc: "主要原料，胡萝卜，玉米。。。", img: nil, price: 15.9),
-                         Meal(name: "黑椒牛柳", desc: "主要原料，胡萝卜，玉米。。。", img: nil, price: 15.9)]
+                ("热销", [Meal(name: "黑椒牛柳", desc: "主要原料，胡萝卜，玉米。。。", img: mealImage2, price: 15.9),
+                         Meal(name: "黑椒牛柳", desc: "主要原料，胡萝卜，玉米。。。", img: mealImage2, price: 15.9)]
                 ),
-                ("冷藏", [Meal(name: "火腿炒饭", desc: "主要原料，胡萝卜，玉米。。。", img: nil, price: 15.9),
-                         Meal(name: "火腿炒饭", desc: "主要原料，胡萝卜，玉米。。。", img: nil, price: 15.9)]
+                ("冷藏", [Meal(name: "火腿炒饭", desc: "主要原料，胡萝卜，玉米。。。", img: mealImage2, price: 15.9),
+                         Meal(name: "火腿炒饭", desc: "主要原料，胡萝卜，玉米。。。", img: mealImage2, price: 15.9)]
                 ),
-                ("下单福利", [Meal(name: "鱼排", desc: "主要原料，胡萝卜，玉米。。。", img: nil, price: 15.9),
-                    Meal(name: "鱼排", desc: "主要原料，胡萝卜，玉米。。。", img: nil, price: 15.9),
-                    Meal(name: "鱼排", desc: "主要原料，胡萝卜，玉米。。。", img: nil, price: 15.9),
-                    Meal(name: "鱼排", desc: "主要原料，胡萝卜，玉米。。。", img: nil, price: 15.9),
-                    Meal(name: "鱼排", desc: "主要原料，胡萝卜，玉米。。。", img: nil, price: 15.9),
-                    Meal(name: "鱼排", desc: "主要原料，胡萝卜，玉米。。。", img: nil, price: 15.9),
-                    Meal(name: "鱼排", desc: "主要原料，胡萝卜，玉米。。。", img: nil, price: 15.9),
-                    Meal(name: "鱼排", desc: "主要原料，胡萝卜，玉米。。。", img: nil, price: 15.9)]
+                ("下单福利", [Meal(name: "鱼排", desc: "主要原料，胡萝卜，玉米。。。", img: mealImage2, price: 15.9),
+                    Meal(name: "鱼排", desc: "主要原料，胡萝卜，玉米。。。", img: mealImage2, price: 15.9),
+                    Meal(name: "鱼排", desc: "主要原料，胡萝卜，玉米。。。", img: mealImage2, price: 15.9),
+                    Meal(name: "鱼排", desc: "主要原料，胡萝卜，玉米。。。", img: mealImage2, price: 15.9),
+                    Meal(name: "鱼排", desc: "主要原料，胡萝卜，玉米。。。", img: mealImage2, price: 15.9),
+                    Meal(name: "鱼排", desc: "主要原料，胡萝卜，玉米。。。", img: mealImage2, price: 15.9),
+                    Meal(name: "鱼排", desc: "主要原料，胡萝卜，玉米。。。", img: mealImage2, price: 15.9),
+                    Meal(name: "鱼排", desc: "主要原料，胡萝卜，玉米。。。", img: mealImage2, price: 15.9)]
                 )
             ]
     }
@@ -166,14 +168,25 @@ class RestaurantDetailViewController: UIViewController, UITableViewDelegate,UITa
         // Pass the selected object to the new view controller.
         if let selectCell = sender as? MealTableViewCell{
             let indexPath = rightTableView.indexPath(for: selectCell)
-            let selectMeal = mealList![(indexPath as! NSIndexPath).section].1[(indexPath as! NSIndexPath).row]
-            print(selectMeal.name)
-        }else{
+            let selectMeal = mealList![(indexPath! as NSIndexPath).section].1[(indexPath as! NSIndexPath).row]
+            let VC2 = segue.destination as! ViewController2
+            VC2.message[0] = "\(selectMeal.price!)"
+            VC2.message[1] = selectMeal.name!
+            VC2.message[2] = selectMeal.desc!
+            VC2.img = selectMeal.img!
+        }
+        else{
+            var cartMeal = [Meal]()
             for section in 0..<mealList!.count{
                 for row in 0..<mealList![section].1.count{
-                    print(mealList![section].1[row].count)
+                    if mealList![section].1[row].count != 0{
+                        cartMeal.append(mealList![section].1[row])
+                    }
+//                    print(mealList![section].1[row].count)
                 }
             }
+            let VC = segue.destination as! CartViewController
+            VC.mealList = cartMeal
         }
         
     }
@@ -181,5 +194,9 @@ class RestaurantDetailViewController: UIViewController, UITableViewDelegate,UITa
     @IBAction func exitToBack(segue:UIStoryboardSegue){
         dismiss(animated: false, completion: nil)
     }
+    
+    
+    
+    
 
 }
